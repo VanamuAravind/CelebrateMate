@@ -1,6 +1,9 @@
 import React, { useEffect, useReducer, useRef, useState } from 'react'
 import './DashBoard.css'
 import CalenderTile from '../components/CalenderTile';
+
+// import '../Pages/DashBoard.css'
+
 const DashBoard = () => {
   const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
   const months = [
