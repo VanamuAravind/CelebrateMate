@@ -4,11 +4,12 @@ import DashBoard from './DashBoard'
 import Profile from './Profile'
 import Friends from './Friends'
 import Settings from './Settings'
+import './MainPage.css'
 
 const MainPage = () => {
     const [page, setPage] = useState('dashboard')
     return (
-        <div>
+        <div className='main-page-div'>
             <div className='side-bar'>
                 <SideBar page={page} setPage={setPage} />
             </div>

@@ -1,0 +1,19 @@
+.main-page-div {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.side-bar {
+    flex: 0 0 250px;
+    background-color: white;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.main-page {
+    flex: 1;
+    padding: 20px;
+    background-color: #f9f9f9;
+    /* overflow-y: auto; */
+}
