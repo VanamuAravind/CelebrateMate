@@ -15,7 +15,7 @@ const MainPage = () => {
                 <SideBar page={page} setPage={setPage} />
             </div>
             <div className='main-page'>
-                <SearchBar />
+                {/* <SearchBar /> */}
                 <div className='page-selector'>
                     {(page === "dashboard" ? <div><DashBoard /></div> : null)}
                     {(page === "friends" ? <div><Friends /></div> : null)}
