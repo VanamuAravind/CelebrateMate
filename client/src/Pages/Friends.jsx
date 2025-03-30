@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../Pages/Friends.css';
 import FriendTile from '../components/FriendTile';
+import SearchBar from '../components/SearchBar';
 
 const Friends = () => {
+    const [searchTerm, setSearchTerm] = useState('');
     const friends = [
         // Birthday is today
         { id: 1, name: 'John Doe', email: 'john@example.com', dateOfBirth: '1990-03-30' },
@@ -54,11 +56,23 @@ const Friends = () => {
         // Birthday is far in the future
         { id: 20, name: 'Rita Gold', email: 'rita@example.com', dateOfBirth: '1990-10-15' },
     ];
+
+    const handleSearch = (term) => {
+        setSearchTerm(term.toLowerCase());
+    };
+
+    const filteredFriends = friends.filter((friend) =>
+        friend.name.toLowerCase().includes(searchTerm) || friend.email.toLowerCase().includes(searchTerm)
+    );
+
     return (
         <div className='friends-page-div'>
-            <h1 className='friends-header-title'>Friends</h1>
+            <div className='friends-header'>
+                <h1 className='friends-header-title'>Friends</h1>
+                <SearchBar onSearch={handleSearch} />
+            </div>
             <div className='friends-tiles'>
-                {friends.map((friend) => (
+                {filteredFriends.map((friend) => (
                     <FriendTile friend={friend} key={friend.id} />
                 ))}
             </div>
