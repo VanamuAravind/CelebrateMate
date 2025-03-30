@@ -1,3 +1,18 @@
+:root{
+  --grey : rgb(150, 150, 150);
+  --grey2 : rgb(227, 227, 227);
+  --grey3 : rgba(177, 177, 177, 0.101);
+  --grey-light : rgba(222, 251, 255, 0.651);
+  --light-blue : rgb(52, 133, 255);
+  --dark-blue : rgb(18, 113, 255);
+  --blue : rgb(121, 174, 255);
+}
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  transition: all 0.2s;
+}
 .App {
   text-align: center;
 }
