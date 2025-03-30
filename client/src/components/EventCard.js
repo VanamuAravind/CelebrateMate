@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './EventCard.css'
-const EventCard = ({event,index}) => {
+const EventCard = ({event,index,dontexpand}) => {
+    const [expand,setExpand] = useState(false)
+    const [bg,setBG] = useState(getRandomColor())
     function getRandomColor() {
         const colors = [
             "#FF6B6B", "#FF8E72", "#FFA94D", "#FFD43B", "#74C0FC",
@@ -12,9 +14,24 @@ const EventCard = ({event,index}) => {
         const randomIndex = Math.floor(Math.random() * colors.length);
         return colors[randomIndex];
     }
+    function onMouseEnter(){
+        setExpand(true)
+    }
+    function onMouseLeave(){
+        setExpand(false)
+    }
   return (
-    <div className='event-small-container' style={{backgroundColor:getRandomColor()}}>
-        <label>{event.name}</label>
+    <div className='event-small-container' 
+    onMouseEnter={onMouseEnter} 
+    onMouseLeave={onMouseLeave} 
+    style={{
+        backgroundColor:bg,
+        marginTop:(index===0)?"0px":"-20px",
+        zIndex:(expand)?"100":5-index,
+        width:(expand && !dontexpand)?"200%":"100%"
+        }}>
+        <label style={{maxWidth:(expand)?"300px":"100px",fontWeight:(expand)?"bold":"normal"}}>{event.eventName}</label>
+        {expand && <label style={{overflow:'visible',fontSize:"12px"}}>{event.eventDescription}</label>}
     </div>
   )
 }

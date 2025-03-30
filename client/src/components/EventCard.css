@@ -3,10 +3,15 @@
     background-color: var(--light-blue);
     border-radius: 4px;
     padding: 8px;
+    margin-top: -10px;
+    display: flex;
+    align-items: start;
+    justify-content: center;
+    flex-direction: column;
 }
 .event-small-container label{
     display: inline-block; /* Ensure it respects width */
-    max-width: 150px; /* Adjust based on need */
+    max-width: 100px; /* Adjust based on need */
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
