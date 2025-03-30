@@ -1,5 +1,7 @@
 import React from 'react'
 
+// import '../Pages/DashBoard.css'
+
 const DashBoard = () => {
   return (
     <div className='dashboard-page-div'>
