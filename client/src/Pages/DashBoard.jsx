@@ -63,7 +63,7 @@ const DashBoard = () => {
   }
   const dummy_events = [
     {
-      name:"vasanth Aids checkup"
+      name:"vasanth Aids checkup description"
     },
     {
       name:"Aravind Birthday"

@@ -1,0 +1,13 @@
+.event-small-container{
+    width: 100%;
+    background-color: var(--light-blue);
+    border-radius: 4px;
+    padding: 8px;
+}
+.event-small-container label{
+    display: inline-block; /* Ensure it respects width */
+    max-width: 150px; /* Adjust based on need */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
