@@ -11,5 +11,10 @@
     position: relative;
 }
 .event-dis-main-container::before{
-    
+    content:"";
+    width: 1px;
+    height: 100%;
+    position: absolute;
+    background-color: var(--grey);
+    left: 0;
 }
