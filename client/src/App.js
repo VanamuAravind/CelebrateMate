@@ -1,9 +1,10 @@
 import './App.css';
-import bg from './images/bg.png'
+import Login from './Pages/Login';
 
 function App() {
   return (
     <div className="App">
+      <Login/>
     </div>
   );
 }
