@@ -1,12 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './CalenderTile.css'
 import EventCard from './EventCard'
-const CalenderTile = ({date,events}) => {
+const CalenderTile = ({index,date,events,changeVis,setCurrentSelectedDate}) => {
+    
     // events = {name}
   return (
     <div className='calender-tile-container'>
+      <i class="fa-solid fa-expand" onClick={()=>{
+        changeVis()
+        setCurrentSelectedDate(date)
+        }}></i>
       <div className='calender-tile-top'>
-        <label>{date}</label>
+        <label>{date.getDate()}</label>
       </div>
       <div className='calender-tile-bottom'>
         {
@@ -15,6 +20,7 @@ const CalenderTile = ({date,events}) => {
             })
         }
       </div>
+      
     </div>
   )
 }

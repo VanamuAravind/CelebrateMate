@@ -13,6 +13,26 @@
   box-sizing: border-box;
   transition: all 0.2s;
 }
+.common-big-heading{
+  font-size: 45px;
+  font-weight: bold;
+  width: fit-content;
+}
+.common-grey-medium-bold{
+  font-weight: 500;
+  color: var(--grey);
+}
+
+.common-grey-font{
+  font-weight: 400;
+  color: var(--gre2);
+  text-align: start;
+}
+.hyper-link{
+  color: var(--light-blue);
+  cursor: pointer;
+}
+
 .App {
   text-align: center;
 }

@@ -81,3 +81,58 @@
     align-items: center;
     justify-content: center;
 }
+.today-calender-quick-view{
+    position: fixed;
+    left: 50vw;
+    width: 50vw;
+    height: 70vh;
+    z-index: 500;
+    transform: translate(-50%,0%);
+    background-color: white;
+    border-radius: 14px;
+    box-shadow: 0pz 0pz 10pz grey;
+}
+.calender-quick-view-banner{
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 20px;
+    position: relative;
+}
+.close-quick-view{
+    position: absolute;
+    right: 0px;
+    width: 28px;
+    aspect-ratio: 1/1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+.close-quick-view:hover{
+    background-color: var(--grey2);
+}
+.today-calender-quick-view{
+    padding: 20px;
+}
+.calender-quick-view-banner i{
+    scale: 1.3;
+}
+.quick-view-events-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    gap: 20px;
+}
+.quick-view-events-container > div{
+    width: 50%;
+    flex: 1;
+}
+.quick-view-all-event-container{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: start;
+}
