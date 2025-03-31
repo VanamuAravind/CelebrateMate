@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import './EventCard.css'
-const EventCard = ({event,index,dontexpand}) => {
+const EventCard = ({event,index,dontexpand,setCurrentSelectedEvent,isSelected,expandon}) => {
     const [expand,setExpand] = useState(false)
     const [bg,setBG] = useState(getRandomColor())
     function getRandomColor() {
@@ -15,23 +15,32 @@ const EventCard = ({event,index,dontexpand}) => {
         return colors[randomIndex];
     }
     function onMouseEnter(){
-        setExpand(true)
+        if(!dontexpand){
+            setExpand(true)
+        }
     }
     function onMouseLeave(){
-        setExpand(false)
+        if(!dontexpand){
+            setExpand(false)
+        }
     }
   return (
-    <div className='event-small-container' 
+    <div className={(isSelected)?"event-small-container event-quick-border":'event-small-container'}
     onMouseEnter={onMouseEnter} 
-    onMouseLeave={onMouseLeave} 
+    onMouseLeave={onMouseLeave}
+    onClick={()=>{
+        setCurrentSelectedEvent(event)
+    }}
     style={{
         backgroundColor:bg,
-        marginTop:(index===0)?"0px":"-20px",
+        marginTop:(dontexpand)?"0px":(index===0)?"0px":"-20px",
         zIndex:(expand)?"100":5-index,
-        width:(expand && !dontexpand)?"200%":"100%"
+        width:(expand && !dontexpand)?"200%":"100%",
+        transform:(expand && expandon==="left")?"translateX(-50%)":"translateX(0%)"
         }}>
-        <label style={{maxWidth:(expand)?"300px":"100px",fontWeight:(expand)?"bold":"normal"}}>{event.eventName}</label>
+        <label style={{maxWidth:(dontexpand)?"100%":(expand)?"300px":"100px",fontWeight:(expand)?"bold":"normal"}}>{event.eventName}</label>
         {expand && <label style={{overflow:'visible',fontSize:"12px"}}>{event.eventDescription}</label>}
+        {dontexpand && <label style={{overflow:'visible',fontSize:"12px"}}>{event.eventDescription}</label>}
     </div>
   )
 }

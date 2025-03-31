@@ -7,11 +7,80 @@ import QuickEventDisplay from '../components/QuickEventDisplay';
 // import '../Pages/DashBoard.css'
 
 const DashBoard = () => {
+  var events = [
+    {
+      eventType: "Meeting",
+      eventName: "Team Standup",
+      eventDescription: "Daily team meeting to discuss progress and blockers.",
+      eventDate: new Date(2025, 3, 1), // April 1, 2025 (Months are 0-based in JS)
+      reminderFrequency: "Daily"
+    },
+    {
+      eventType: "Conference",
+      eventName: "Tech Summit 2025",
+      eventDescription: "Annual technology conference covering latest trends.",
+      eventDate: new Date(2025, 5, 15), // June 15, 2025
+      reminderFrequency: "Weekly"
+    },
+    {
+      eventType: "Birthday",
+      eventName: "John's Birthday",
+      eventDescription: "John's birthday celebration at the office.",
+      eventDate: new Date(2025, 6, 22), // July 22, 2025
+      reminderFrequency: "Yearly"
+    },
+    {
+      eventType: "Webinar",
+      eventName: "AI in 2025",
+      eventDescription: "A webinar discussing advancements in AI.",
+      eventDate: new Date(2025, 4, 10), // May 10, 2025
+      reminderFrequency: "Monthly"
+    },
+    {
+      eventType: "Holiday",
+      eventName: "Independence Day",
+      eventDescription: "National holiday celebration.",
+      eventDate: new Date(2025, 3, 15), // August 15, 2025
+      reminderFrequency: "Yearly"
+    },
+    {
+      eventType: "Birthday",
+      eventName: "John's Birthday",
+      eventDescription: "John's birthday celebration at the office.",
+      eventDate: new Date(2025, 2, 22), 
+      reminderFrequency: "Yearly"
+    },
+    {
+      eventType: "Webinar",
+      eventName: "AI in 2025",
+      eventDescription: "A webinar discussing advancements in AI.",
+      eventDate: new Date(2025, 2, 15),
+      reminderFrequency: "Monthly"
+    },
+    {
+      eventType: "Holiday",
+      eventName: "Independence Day",
+      eventDescription: "National holiday celebration.",
+      eventDate: new Date(2025, 3, 15),
+      reminderFrequency: "Yearly"
+    }
+  ];
+  
   const [showQuickView,setShowQuickView] = useState(false)
   const [currentSelectedDate,setCurrentSelectedDate]=useState()
-    function changeVis(){
-        setShowQuickView(!showQuickView)
+  const [currentSelectedEvent,setCurrentSelectedEvent] = useState(events[0])
+
+  const getEventsOnDay = (date)=>{
+    return events.filter((event,i)=>event.eventDate.getFullYear()==date.getFullYear() && event.eventDate.getDate()==date.getDate() && event.eventDate.getMonth()==date.getMonth())
+  }
+  function changeVis(){
+      setShowQuickView(!showQuickView)
+  }
+  useEffect(()=>{
+    if(currentSelectedDate){
+      setCurrentSelectedEvent(getEventsOnDay(currentSelectedDate)[0])
     }
+  },[showQuickView])
   const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
   const months = [
     "January", "February", "March", "April", "May", "June", 
@@ -72,69 +141,7 @@ function getAllDays(year, month) {
       setCurrYear(prev=>prev-1)
     }
   }
-  var events = [
-    {
-      eventType: "Meeting",
-      eventName: "Team Standup",
-      eventDescription: "Daily team meeting to discuss progress and blockers.",
-      eventDate: new Date(2025, 3, 1), // April 1, 2025 (Months are 0-based in JS)
-      reminderFrequency: "Daily"
-    },
-    {
-      eventType: "Conference",
-      eventName: "Tech Summit 2025",
-      eventDescription: "Annual technology conference covering latest trends.",
-      eventDate: new Date(2025, 5, 15), // June 15, 2025
-      reminderFrequency: "Weekly"
-    },
-    {
-      eventType: "Birthday",
-      eventName: "John's Birthday",
-      eventDescription: "John's birthday celebration at the office.",
-      eventDate: new Date(2025, 6, 22), // July 22, 2025
-      reminderFrequency: "Yearly"
-    },
-    {
-      eventType: "Webinar",
-      eventName: "AI in 2025",
-      eventDescription: "A webinar discussing advancements in AI.",
-      eventDate: new Date(2025, 4, 10), // May 10, 2025
-      reminderFrequency: "Monthly"
-    },
-    {
-      eventType: "Holiday",
-      eventName: "Independence Day",
-      eventDescription: "National holiday celebration.",
-      eventDate: new Date(2025, 3, 15), // August 15, 2025
-      reminderFrequency: "Yearly"
-    },
-    {
-      eventType: "Birthday",
-      eventName: "John's Birthday",
-      eventDescription: "John's birthday celebration at the office.",
-      eventDate: new Date(2025, 2, 22), 
-      reminderFrequency: "Yearly"
-    },
-    {
-      eventType: "Webinar",
-      eventName: "AI in 2025",
-      eventDescription: "A webinar discussing advancements in AI.",
-      eventDate: new Date(2025, 2, 15),
-      reminderFrequency: "Monthly"
-    },
-    {
-      eventType: "Holiday",
-      eventName: "Independence Day",
-      eventDescription: "National holiday celebration.",
-      eventDate: new Date(2025, 3, 15),
-      reminderFrequency: "Yearly"
-    }
-  ];
-  const [currentSelectedEvent,setCurrentSelectedEvent] = useState(events[0])
-
-  const getEventsOnDay = (date)=>{
-    return events.filter((event,i)=>event.eventDate.getFullYear()==date.getFullYear() && event.eventDate.getDate()==date.getDate() && event.eventDate.getMonth()==date.getMonth())
-  }
+  
   return (
     <div className='dashboard-page-div'>
       <div className='dashboard-top-container'>
@@ -171,6 +178,7 @@ function getAllDays(year, month) {
                       return <div key={i}>
                           <CalenderTile 
                             index={index} 
+                            idx = {i}
                             date={date} 
                             events={getEventsOnDay(date)} 
                             changeVis={changeVis} 
@@ -203,6 +211,7 @@ function getAllDays(year, month) {
               {
                 getEventsOnDay(currentSelectedDate).map((event,i)=>{
                   return <EventCard
+                    setCurrentSelectedEvent={setCurrentSelectedEvent}
                     event={event}
                     index={i}
                     dontexpand = {true}
