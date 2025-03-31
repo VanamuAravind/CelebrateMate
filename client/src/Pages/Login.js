@@ -3,8 +3,41 @@ import bg from '../images/bg.png'
 import bg1 from '../images/bg1.jpg'
 import './Login.css'
 import CustomInput from '../components/CustomInput'
+import axios from 'axios'
+import { Navigate, useNavigate } from 'react-router-dom'
 const Login = () => {
-  const [state,setState] = useState("signup")
+  const [state,setState] = useState("login")
+  const [firstname,setFirstName] = useState("")
+  const [lastname,setLastName] = useState("")
+  const [email,setEmail] = useState("")
+  const [password,setPassword] = useState("")
+  const navigate = useNavigate()
+  const handleSubmit = ()=>{
+    if(state==="signup"){
+      //signup
+      axios.post('http://localhost:8086/user/createuser',{firstname,lastname,email,password})
+      .then((res)=>{
+        // console.log(res)
+        navigate("/home")
+      })
+      .catch((err)=>{
+        console.log(err)
+      })
+    }
+    else{
+      //login
+      axios.post('http://localhost:8086/user/loginuser',{email,password})
+      .then((res)=>{
+        // console.log(res)
+        const token = res.data.token
+        localStorage.setItem("user_token",token)
+        navigate("/home")
+      })
+      .catch((err)=>{
+        console.log(err)
+      })
+    }
+  }
   return (
     <div className='login-main-container'>
       <div className='login-left-container'>
@@ -24,17 +57,17 @@ const Login = () => {
             </label>
 
             <div style={{width:"55%",marginTop:"20px",display:(state=="signup")?"flex":"none"}}>
-              <CustomInput heading="firstname" icon={<i class="fa-solid fa-address-card"></i>} width="50%"/>
-              <CustomInput heading="lastname" icon={<i class="fa-solid fa-address-card"></i>} width="50%"/>
+              <CustomInput changeValue={setFirstName} heading="firstname" icon={<i class="fa-solid fa-address-card"></i>} width="50%"/>
+              <CustomInput changeValue={setLastName} heading="lastname" icon={<i class="fa-solid fa-address-card"></i>} width="50%"/>
             </div>
             <div style={{width:"55%"}}>
-              <CustomInput heading="email" icon={<i class="fa-solid fa-envelope"></i>} width="100%"/>
+              <CustomInput changeValue={setEmail} heading="email" icon={<i class="fa-solid fa-envelope"></i>} width="100%"/>
             </div>
             <div style={{width:"55%"}}>
-              <CustomInput heading="password" icon={<i class="fa-solid fa-eye"></i>} width="100%" encrypt={true}/>
+              <CustomInput changeValue={setPassword} heading="password" icon={<i class="fa-solid fa-eye"></i>} width="100%" encrypt={true}/>
             </div>
             <div style={{width:"55%"}}>
-              <button>{(state === "signup")?"Create Account":"Login"}</button>
+              <button onClick={handleSubmit}>{(state === "signup")?"Create Account":"Login"}</button>
             </div>
         </div>
       </div>

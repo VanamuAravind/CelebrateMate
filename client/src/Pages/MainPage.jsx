@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import SideBar from '../components/SideBar'
 import DashBoard from './DashBoard'
 import Profile from './Profile'
@@ -10,6 +10,11 @@ import Events from './Events'
 
 const MainPage = () => {
     const [page, setPage] = useState('dashboard')
+    useEffect(()=>{
+        if(!localStorage.getItem("user_token")){
+            window.location.href = "/login"
+        }
+    })
     return (
         <div className='main-page-div'>
             <div className='side-bar'>

@@ -16,3 +16,6 @@
     overflow: hidden;
     text-overflow: ellipsis;
 }
+.event-quick-border{
+    border: 1px solid var(--dark-blue);
+}

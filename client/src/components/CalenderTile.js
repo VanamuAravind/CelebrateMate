@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './CalenderTile.css'
 import EventCard from './EventCard'
-const CalenderTile = ({index,date,events,changeVis,setCurrentSelectedDate}) => {
+const CalenderTile = ({index,date,events,changeVis,setCurrentSelectedDate,idx}) => {
     
     // events = {name}
   return (
@@ -16,7 +16,7 @@ const CalenderTile = ({index,date,events,changeVis,setCurrentSelectedDate}) => {
       <div className='calender-tile-bottom'>
         {
             events.map((event,i)=>{
-                return <EventCard event={event} index={i}/>
+                return <EventCard event={event} index={i} expandon={(idx>5)?"left":"right"}/>
             })
         }
       </div>
