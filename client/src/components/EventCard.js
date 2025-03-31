@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import './EventCard.css'
-const EventCard = ({event,index,dontexpand,setCurrentSelectedEvent,isSelected}) => {
+const EventCard = ({event,index,dontexpand,setCurrentSelectedEvent,isSelected,expandon}) => {
     const [expand,setExpand] = useState(false)
     const [bg,setBG] = useState(getRandomColor())
     function getRandomColor() {
@@ -35,7 +35,8 @@ const EventCard = ({event,index,dontexpand,setCurrentSelectedEvent,isSelected}) 
         backgroundColor:bg,
         marginTop:(dontexpand)?"0px":(index===0)?"0px":"-20px",
         zIndex:(expand)?"100":5-index,
-        width:(expand && !dontexpand)?"200%":"100%"
+        width:(expand && !dontexpand)?"200%":"100%",
+        transform:(expand && expandon==="left")?"translateX(-50%)":"translateX(0%)"
         }}>
         <label style={{maxWidth:(dontexpand)?"100%":(expand)?"300px":"100px",fontWeight:(expand)?"bold":"normal"}}>{event.eventName}</label>
         {expand && <label style={{overflow:'visible',fontSize:"12px"}}>{event.eventDescription}</label>}

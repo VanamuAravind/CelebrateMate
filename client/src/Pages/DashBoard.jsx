@@ -178,6 +178,7 @@ function getAllDays(year, month) {
                       return <div key={i}>
                           <CalenderTile 
                             index={index} 
+                            idx = {i}
                             date={date} 
                             events={getEventsOnDay(date)} 
                             changeVis={changeVis} 
