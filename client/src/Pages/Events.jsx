@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import './Events.css';
+import EditEvent from '../components/EditEvent';
 
 const Events = () => {
-    const [expandedEventId, setExpandedEventId] = useState(null);
-    const events = [
+    const [events, setEvents] = useState([
         {
             id: 1,
             title: 'National Seminar',
@@ -144,11 +144,37 @@ const Events = () => {
             notes: 'Snacks will be provided.',
             date: 'Tue, Jan 20, 2026',
         },
-    ];
+    ]);
+
+    const [editingEvent, setEditingEvent] = useState(null);
+
+    const [expandedEventId, setExpandedEventId] = useState(null);
 
     const toggleExpand = (id) => {
         setExpandedEventId(expandedEventId === id ? null : id);
     };
+
+    const deleteEvent = (id) => {
+        const updatedEvents = events.filter((event) => event.id !== id);
+        setEvents(updatedEvents);
+    };
+
+    const handleEdit = (event) => {
+        setEditingEvent(event);
+    };
+
+    const handleSave = (updatedEvent) => {
+        setEvents((prevEvents) =>
+            prevEvents.map((event) =>
+                event.id === updatedEvent.id ? updatedEvent : event
+            )
+        );
+        setEditingEvent(null);
+    };
+
+    if (editingEvent) {
+        return <EditEvent event={editingEvent} onSave={handleSave} onCancel={() => setEditingEvent(null)} />;
+    }
 
     return (
         <div className="events-page">
@@ -176,18 +202,36 @@ const Events = () => {
                                 <p className="expanded-date"><strong>Date:</strong> {event.date}</p>
                             </div>
                         ) : (
-                            <div className="event-details">
-                                <div className="event-title-container">
-                                    <h2 className="event-title">{event.title}</h2>
+                            <div>
+                                <div className="event-details">
+                                    <div className="event-title-container">
+                                        <h2 className="event-title">{event.title}</h2>
+                                    </div>
+                                    <div className="event-description-container">
+                                        <p className="event-description">{event.description}</p>
+                                    </div>
+                                    <div className="event-notes-container">
+                                        <p className="event-notes"><strong>Notes:</strong> {event.notes}</p>
+                                    </div>
+                                    <div className="event-date">
+                                        <p><strong>Date:</strong> {event.date}</p>
+                                    </div>
                                 </div>
-                                <div className="event-description-container">
-                                    <p className="event-description">{event.description}</p>
-                                </div>
-                                <div className="event-notes-container">
-                                    <p className="event-notes"><strong>Notes:</strong> {event.notes}</p>
-                                </div>
-                                <div className="event-date">
-                                    <p><strong>Date:</strong> {event.date}</p>
+                                <div className="event-buttons">
+                                    <input
+                                        type="button"
+                                        value="Edit"
+                                        className="edit-event-button"
+                                        onClick={() => handleEdit(event)} // Set the event to be edited
+                                    />
+                                    <input
+                                        type="button"
+                                        value="Delete"
+                                        className="delete-event-button"
+                                        onClick={() =>
+                                            setEvents(events.filter((ev) => ev.id !== event.id))
+                                        }
+                                    />
                                 </div>
                             </div>
                         )}

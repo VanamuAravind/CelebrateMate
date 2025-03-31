@@ -34,7 +34,7 @@
 .events-headings {
   display: flex;
   padding-left: 20px;
-  width:100%;
+  width: 100%;
   justify-content: space-between;
   font-weight: bold;
   margin-bottom: 10px;
@@ -108,13 +108,6 @@
   flex: 1;
 }
 
-/* .event-date {
-  flex: 1;
-  text-align: right;
-  font-size: 14px;
-  color: #555;
-} */
-
 .event-title {
   font-size: 18px;
   margin-bottom: 10px;
@@ -130,4 +123,42 @@
 .event-notes {
   font-size: 14px;
   color: #555;
+}
+
+/* New changes for buttons */
+.event-buttons {
+  display: flex;
+  justify-content: flex-end; /* Align buttons to the right */
+  gap: 10px; /* Add spacing between buttons */
+  margin-top: 10px; /* Add some space above the buttons */
+}
+
+.edit-event-button,
+.delete-event-button {
+  padding: 8px 15px; /* Add padding for better appearance */
+  font-size: 14px; /* Adjust font size */
+  border: none; /* Remove default border */
+  border-radius: 5px; /* Add rounded corners */
+  cursor: pointer; /* Change cursor to pointer */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Add hover effects */
+}
+
+.edit-event-button {
+  background-color: #4caf50; /* Green background for edit button */
+  color: white; /* White text */
+}
+
+.edit-event-button:hover {
+  background-color: #45a049; /* Darker green on hover */
+  transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+.delete-event-button {
+  background-color: #f44336; /* Red background for delete button */
+  color: white; /* White text */
+}
+
+.delete-event-button:hover {
+  background-color: #d32f2f; /* Darker red on hover */
+  transform: scale(1.05); /* Slightly enlarge on hover */
 }
