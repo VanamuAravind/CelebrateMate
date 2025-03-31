@@ -167,26 +167,28 @@ const Events = () => {
                         key={event.id}
                         className={`event-card ${expandedEventId === event.id ? 'expanded' : ''}`}
                         onClick={() => toggleExpand(event.id)}
-                        onMouseLeave={() => setExpandedEventId(null)}
                     >
-                        <div className="event-details">
-                            <div className="event-title-container">
-                                <h2 className="event-title">{event.title}</h2>
-                            </div>
-                            <div className="event-description-container">
-                                <p className="event-description">{event.description}</p>
-                            </div>
-                            <div className="event-notes-container">
-                                <p className="event-notes"><strong>Notes:</strong> {event.notes}</p>
-                            </div>
-                            <div className="event-date">
-                                <p><strong>Date:</strong> {event.date}</p>
-                            </div>
-                        </div>
-
-                        {expandedEventId === event.id && (
+                        {expandedEventId === event.id ? (
                             <div className="event-expanded-details">
-                                <p>{event.details}</p>
+                                <p className="expanded-title"><strong>Title:</strong> {event.title}</p>
+                                <p className="expanded-description"><strong>Description:</strong> {event.description}</p>
+                                <p className="expanded-notes"><strong>Notes:</strong> {event.notes}</p>
+                                <p className="expanded-date"><strong>Date:</strong> {event.date}</p>
+                            </div>
+                        ) : (
+                            <div className="event-details">
+                                <div className="event-title-container">
+                                    <h2 className="event-title">{event.title}</h2>
+                                </div>
+                                <div className="event-description-container">
+                                    <p className="event-description">{event.description}</p>
+                                </div>
+                                <div className="event-notes-container">
+                                    <p className="event-notes"><strong>Notes:</strong> {event.notes}</p>
+                                </div>
+                                <div className="event-date">
+                                    <p><strong>Date:</strong> {event.date}</p>
+                                </div>
                             </div>
                         )}
                     </div>
